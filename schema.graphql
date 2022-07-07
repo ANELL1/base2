@@ -1,0 +1,780 @@
+scalar Upload
+
+type Mutation {
+     signupAlfa(data:[String]!):signupAlfa
+     signupEmpresas(data:[String]!):signupEmpresas
+     insertCotizaciones(data:[String]!):insertCotizaciones
+     insertClientes(data:[String]!):insertClientes
+     deleteCliente(data:[String]!):deleteCliente
+    #  updateCliente(data:[String]!):updateCliente    
+     insertContacto(data:[String]!):insertContacto
+     insertProductoServicio(data:[String]!):insertProductoServicio 
+     insertClientesAlfa(data:[String]!):insertClientesAlfa
+     sendEmailCotizacion(data:[String]!):message
+     insertTotales(data:[String]!):message
+     updateStatusCotizacion(data:[String]!):message
+     updateContacto(data:[String]!):updateContacto
+     deliteContacto(data:[String]!):deliteContacto
+     cotizacionVencida(data:[String]!):message
+     accesoSistema(data:[String]!):message
+     transactionClientes(data:[String]!):message
+     updatePasswordCliente(data:[String]!):message
+     quitarAccesoSistema(data:[String]!):message
+     registerSupport(data:[String]!):message
+     insertURLVideos(data:[String]!):insertURLVideos
+    #  insertVenta(data:[String]!):insertVenta
+     ventas(data:[String]!):ventas
+     insertTotalesVenta(data:[String]!):insertTotalesVenta
+     registerPoliza(data:[String]!):message
+     activarPoliza(data:[String]!):[message]
+     editarPoliza(data:[String]!):[message]
+    #  polizaVencida(data:[String]!):message
+     updateInsertProductoServicio(data:[String]!):updateInsertProductoServicio
+     updateCliente(data:[String]!):updateCliente
+     polizaVencida(data:[String]!):polizas
+     registerCupones(data:[String]!):message
+     updateCupones(data:[String]!):message
+     deleteCupones(data:[String]!):message
+     registerSolictudCotizacion(data:[String]!):message
+     sendMailSolicitudCotizacion(data:[String]!):message
+     cancelSolicitud(data:[String]!):message
+}
+
+type Query{
+loginAdminAlfa(data:[String]!):loginAdminAlfa
+loginEmpresas(data:[String]!):loginEmpresas
+getTablaClientes(data:[String]!):[getTablaClientes]
+# getEmpresa(data:[String]!):[getEmpresa]
+getEmpresas(data:[String]!):[getEmpresas]
+getCotizacionesTabla(data:[String]!):[getCotizacionesTabla]
+getIdCotizacion(data:[String]!):[getCotizacionesTabla]
+getClienteRFC(data:[String]!):[getClienteRFC]
+getTablaProductoServicio(data:[String]!):[getTablaProductoServicio]
+getProductoServicio(data:[String]!):[getProductoServicio]
+getTablaClientesAlfa(data:[String]!):[getTablaClientesAlfa]
+getIdClientesAlfa(data:[String]!):[getIdClientesAlfa]
+getProductoServicioByFolio(data:[String]!):[getProductoServicio]
+getTotalesByFolio(data:[String]!):[totales]
+getClienteId(data:[String]!):[getTablaClientes]
+getTablaContactos(data:[String]!):[getTablaContactos]
+getContactosId(data:[String]!):[getContactosId]
+getCotizacionFk_Contactos(data:[String]!):[getContactosId]
+getClienteByCorreo(data:[String]!):[getTablaClientesAlfa]
+loginClientes(data:[String]!):getTablaClientesAlfa
+getCotizacionByFolio(data:[String]!):[getCotizacionByFolio]
+getAdminAlfa(data:[String]!):[loginAdminAlfa]
+getURLVideos(data:[String]!):[getURLVideos]
+getPolizas(data:[String]!):[polizas]
+getPoliza(data:[String]!):[polizas]
+getTableInicioSesion(data:[String]!):[transaccionesClientes]
+getVentasTabla(data:[String]!):[getIdVenta]
+getIdVenta(data:[String]!):[getIdVenta]
+getTotalesByFolioVenta(data:[String]!):[getTotalesByFolioVenta]
+getProductoServicioByFolioVentas(data:[String]!):[getProductoServicioByFolioVentas]
+getVentasTablaIndicadores(data:[String]!):[ventas]
+getMaxProductoServicio(data:[String]!):[getMaxProductoServicio]
+getProductoServicioActualizado(data:[String]!):[getTablaProductoServicio]
+getCotizacionesFolio(data:[String]!):[getCotizacionesFolio]
+getAllTablaProductoServicio(data:[String]!):[getTablaProductoServicio]
+getCupones(data:[String]!):[cupones]
+getSolicitudes(data:[String]!):[solicitudes]
+getSolicitudesByFkEmpresa(data:[String]!):[solicitudes]
+getSupport(data:[String]!):[support]
+} 
+
+type support {
+    id_soporte:String
+    fechaSoporte:String
+    consola:String
+    numeroPoliza:String
+    asunto:String
+    idTeamviewer:String
+    passTeamviewer:String
+    folio:String
+    status:String
+    ejecutivo:String
+    rfc:String
+    razonSocial:String
+}
+type solicitudes {
+    id_solicitudCotizacion:String
+    folioSolicitud:String
+    asesorAsignado:String
+    fechaEmision:String
+    fechaValidacion:String
+    fechaExpiracion:String
+    statusSolicitud:String
+    fk_productoServicio:String
+    id_productoServicio:String,
+    tipo:String,
+    tipoLicenciamiento:String,
+    lineaProducto:String,
+    concepto:String,
+    precio:String, 
+}
+
+type cupones {
+    id_cupones:String
+    codigo:String
+    descripcion:String
+    descuento:String
+    polizaActivaVencida:String
+    cuponActivo:String
+    fechaRegistro:String
+    fechaExpiracion:String
+    id_Evento:String
+    url:String
+}
+type updateCliente{
+     rfc:String,
+     razonSocial:String,
+     tipoEmpresa:String,
+     tamanoEmpresa:String,
+     giroEmpresarial:String,
+     paginaWeb:String,
+     domicilioFiscal:String,
+     message:String
+}
+
+ type getCotizacionesFolio{
+     id_cotizaciones:String,
+     fechaEmision:String,
+     NumFolio:String,
+     cantidad:String,
+     descuento:String,
+     descuentoAplicado:String,
+     TotalPrecioProducto:String,
+     statusCotizacion:String,
+     fk_cliente:String,     
+     fk_adminalfa:String,
+     fk_empresa:String,
+     fechaExpiracion:String,
+     vigencia:String,
+     fk_contacto:String,
+     tipoSolicitud:String,
+    id_productoServicio:String,
+    tipo:String,
+    tipoLicenciamiento:String,
+    lineaProducto:String,
+    concepto:String,
+    precio:String  
+    consecutivo:String,
+    id_actualizacion:String,
+    asignacion:String,
+    fechaRegistro:String,
+    message:String
+ }
+
+
+ type getMaxProductoServicio{
+    id_maximo:String
+    id_productoServicio:String,
+    tipo:String,
+    tipoLicenciamiento:String,
+    lineaProducto:String,
+    concepto:String,
+    precio:String, 
+    consecutivo:String,
+    id_actualizacion:String,
+    asignacion:String,
+    fechaRegistro:String,
+    fk_empresa:String,
+    }
+
+ type updateInsertProductoServicio { 
+     id_productoServicio:String,
+     tipo:String,
+     tipoLicenciamiento:String,
+     LineaProducto:String,
+     concepto:String,
+     precio:String,
+     consecutivo:String,
+     id_actualizacion:String, 
+     asignacion:String,    
+     fechaRegistro:String,
+     fk_empresa:String,    
+     message:String
+}
+
+type getTotalesByFolioVenta{
+    id_totalVenta:String,
+    subTotal:String,
+     IVA:String,
+     total:String,
+     numFolioVenta:String,
+     message:String
+
+} 
+
+type getProductoServicioByFolioVentas{
+    id_venta:String,
+    numFolio:String,
+    cantidad:String,
+    descuento:String,
+    descuentoAplicado:String,
+    TotalPrecioProducto:String,
+    ProductoPrecioUnitario:String,
+    TotalPrecioProductoIVA:String,
+    fechaPago:String,
+    hora:String,
+    banco:String,
+    referenciaPago:String,
+    tipoPago:String,
+    importe:String,
+    fechaEmisionVenta:String,
+    statusPoliza:String,
+    fk_productoServicio:String,
+    fk_cliente:String,
+    fk_adminalfa:String,
+    fk_empresa:String,
+    fk_contacto:String,    
+    id_productoServicio:String,
+    tipo:String,
+    tipoLicenciamiento:String,
+    lineaProducto:String,
+    concepto:String,
+    precio:String,
+    consecutivo:String,
+
+}
+type getIdVenta{
+    id_venta:String,
+    numFolio:String,
+    cantidad:String,
+    descuento:String,
+    descuentoAplicado:String,
+    TotalPrecioProducto:String,
+    ProductoPrecioUnitario:String,
+    TotalPrecioProductoIVA:String,
+    fechaPago:String,
+    hora:String,
+    banco:String,
+    referenciaPago:String,
+    tipoPago:String,
+    importe:String,
+    fechaEmisionVenta:String,
+    statusPoliza:String,
+    fk_productoServicio:String,
+    fk_cliente:String,
+    fk_adminalfa:String,
+    fk_empresa:String,
+    fk_contacto:String,
+    rfc:String,
+    razonSocial:String,
+    tamanoEmpresa:String,
+    giroEmpresarial:String,
+    paginaWeb:String,
+    domicilioFiscal:String,
+    message:String
+
+}
+type transaccionesClientes{
+    id_transacciones:String
+    id_cliente:String
+    rfc:String
+    fecha:String
+    hora:String
+    nombreRepresantante:String
+    apellidosRepresantante:String  
+    razonSocial:String
+}
+
+type polizas {
+    fk_cliente:String
+    id_polizas:String
+    fechaInicial:String
+    fechaFinal:String
+    statusPoliza:String
+    razonSocial:String
+    tipo:String
+    concepto:String
+    lineaProducto:String
+    rfc:String,
+    message:String
+}
+ type insertTotalesVenta{
+     subTotal:String,
+     IVA:String,
+     total:String,
+     numFolioVenta:String,
+     message:String
+ }
+
+ type ventas {
+    # id_venta:String,
+    numFolio:String,
+    cantidad:String,
+    descuento:String,
+    fechaEmisionVenta:String,
+    descuentoAplicado:String,
+    TotalPrecioProducto:String,
+    ProductoPrecioUnitario:String,
+    TotalPrecioProductoIVA:String,
+    fechaPago:String,
+    hora:String,
+    banco:String,
+    referenciaPago:String,
+    tipoPago:String,
+    importe:String,
+    fechaInicialPoliza:String,
+    statusPoliza:String,
+    fk_productoServicio:String,
+    fk_cliente:String,
+    fk_adminalfa:String,
+    fk_empresa:String,
+    fk_contacto:String,
+     id_productoServicio:String,
+    tipo:String,
+    concepto:String,
+    precio:String , 
+    consecutivo:String
+    message:String
+ }
+
+ 
+# type insertVenta{
+#    numFolio:String
+#  cantidad:String
+#  descuento:String
+#  descuentoAplicado:String
+#  TotalPrecioProducto:String
+#  fechaPago:String
+#  banco:String
+#  referenciaPago:String
+#  tipoPago:String
+#  importe:String
+#  fechaInicialPoliza:String
+#  statusPoliza:String
+#  fk_productoServicio:String
+#  fk_cliente:String
+#  fk_adminalfa:String
+#  fk_empresa:String
+#  fk_contacto:String
+#     message:String
+# }
+
+type getURLVideos{
+    id_videos:String, 
+     descripcion:String,
+     autor:String, 
+     urlVideos:String,
+     fechaInicio:String,
+     fechaExpiracion:String,
+     statusVideo:String,
+     fk_empresa:String,
+     message:String   
+}
+
+type insertURLVideos{   
+     id_videos:String ,
+     descripcion:String ,
+     autor:String, 
+     urlVideos:String,
+     fechaInicio:String,
+     fechaExpiracion:String,
+     statusVideo:String,
+     fk_empresa:String,
+     message:String    
+    }
+
+type getCotizacionByFolio{
+   id_cotizaciones:String,
+   fechaEmision:String,
+   NumFolio:String,   
+   cantidad:String,
+   descuento:String,
+   descuentoAplicado:String,
+   TotalPrecioProducto:String,
+   fk_cliente:String,
+   fk_productoServicio:String,
+   fk_adminalfa:String,
+   fk_empresa:String,   
+   fechaExpiracion:String, 
+   fk_contacto:String,
+   tipoSolicitud:String,
+   id_productoServicio:String,
+   tipo:String,
+   tipoLicenciamiento:String
+   LineaProducto:String,
+   concepto:String,
+   precio:String,
+   consecutivo:String,
+   id_contacto:String,
+   nombre:String,
+   apellidos:String,
+   correo1:String,
+   correo2:String
+   telefono1:String,
+   extensionTelefonica:String,
+   telefono2:String,
+   puesto:String,
+   rfc:String,
+   razonSocial:String
+
+
+   
+}
+
+type getContactosId{
+    id_contacto:String,
+    nombre:String,
+    apellidos:String,
+    correo1:String,
+    correo2:String,
+    telefono1:String,
+    extensionTelefonica:String,
+    telefono2:String,
+    puesto:String, 
+    tipoContacto:String,
+    fk_clientesads:String, 
+    message:String
+}
+
+type deliteContacto{
+    id_contacto:String,
+    nombre:String,
+    apellidos:String,
+    correo1:String,
+    correo2:String,
+    telefono1:String,
+    extensionTelefonica:String,
+    telefono2:String,
+    puesto:String,
+    tipoContacto:String,  
+    fk_clientesads:String,   
+    message:String
+}
+
+type updateContacto{
+     nombre:String,
+    apellidos:String,
+    correo1:String,
+    correo2:String,
+    telefono1:String,
+    extensionTelefonica:String,
+    telefono2:String,
+    puesto:String,   
+    tipoContacto:String,  
+    message:String
+
+}
+
+type totales{
+     subtotal:String,
+     iva:String,
+     total:String, 
+     message:String
+ }
+
+type getTablaContactos{
+    id_contacto:String,
+    nombre:String,
+    apellidos:String,
+    correo1:String,
+    correo2:String,
+    telefono1:String,
+    extensionTelefonica:String
+    telefono2:String,
+    puesto:String,
+    tipoContacto:String
+    message:String
+    fk_clientesads:String
+    fk_contactoAcceso:String
+}
+
+type getIdClientesAlfa{
+    id_cliente:String,
+    rfc:String,
+    razonSocial:String, 
+}
+
+type getTablaClientesAlfa{
+    nombreRepresantante:String
+    apellidosRepresantante:String  
+    message:String,
+    id_cliente:String,
+    rfc:String,
+    razonSocial:String,
+    fk_empresa:String,
+    tipoEmpresa:String,
+    tamanoEmpresa:String
+    giroEmpresarial:String
+    correo:String
+    telefono:String
+    paginaWeb:String
+    domicilioFiscal:String
+    acceso:String,
+    fk_contactoAcceso:String
+    token:String
+}
+
+type insertTotales{
+    subtotal:String,
+    iva:String,
+    total:String,
+    message:String
+}
+
+
+type message{
+    message:String
+}
+
+
+type insertClientesAlfa{
+     rfc:String,
+     razonSocial:String,
+     tipoEmpresa:String,
+     tamanoEmpresa:String,
+     giroEmpresarial:String,
+     paginaWeb:String,
+     domicilioFiscal:String,
+     fk_empresa:String, 
+     message:String
+}
+
+type insertProductoServicio{
+    id_productoServicio:String,
+    tipo:String,
+    concepto:String,
+    precio:String, 
+    consecutivo:String,
+    tipoLicenciamiento:String,
+    LineaProducto:String,
+    id_actualizacion:String,
+    asignacion:String,    
+    fechaRegistro:String,
+    fk_empresa:String,    
+    message:String
+}
+
+type insertContacto{
+    nombre:String,
+    apellidos:String,
+    correo1:String,
+    correo2:String,
+    telefono1:String,
+    extensionTelefonica:String,
+    telefono2:String,
+    puesto:String, 
+    tipoContacto:String,
+    fk_clientesads:String, 
+    message:String
+}
+
+
+type getProductoServicio{
+    id_productoServicio:String,
+    tipo:String,
+    concepto:String,
+    precio:String, 
+    lineaProducto:String 
+}
+type getTablaProductoServicio{
+    id_productoServicio:String,
+    tipo:String,
+    tipoLicenciamiento:String,
+    lineaProducto:String,
+    concepto:String,
+    precio:String, 
+    consecutivo:String,
+    id_actualizacion:String,
+    asignacion:String,
+    fechaRegistro:String,
+    fk_empresa:String,
+    message:String
+}
+
+# type updateCliente{
+#    id_cliente:String,
+#     empresa:String,
+#     rfc:String,
+#     nombre:String,
+#     apellido:String,
+#     correo1:String,
+#     correo2:String,
+#     telefono1:String,
+#     telefono2:String,    
+#     message:String
+
+# }
+
+type deleteCliente{ 
+   id_cliente:String,
+    empresa:String,
+    rfc:String,
+    nombre:String,
+    apellido:String,
+    correo1:String,
+    correo2:String,
+    telefono1:String,
+    telefono2:String,    
+    message:String
+
+}
+
+type insertClientes{ 
+     rfc:String,
+     empresa:String,
+     nombre:String,
+     apellido:String,
+     correo1:String,
+     correo2:String,
+     telefono1:String,
+     telefono2:String,
+     fk_empresas:String,
+     message:String
+
+}
+
+type getClienteRFC {
+   id_cliente:String
+    razonSocial:String
+    rfc:String
+    telefono:String
+    correo:String
+    nombreRepresentante:String
+}
+
+type getIdCotizacion{
+   id_cotizacion:String,
+   rfc:String, 
+   razonSocial:String ,
+   nombre:String, 
+   apellidos:String , 
+   correo1:String ,
+   correo2:String , 
+   telefono1:String,
+   telefono2:String,  
+   servicio:String,
+   precio:String, 
+   iva:String,
+   total:String,   
+   vendedor:String,
+   fecha:String,   
+   fk_adminalfa:String,
+   message:String
+
+}
+
+
+type getCotizacionesTabla{
+    id_cotizaciones:String, 
+    promocion:String,
+    fechaEmision:String,
+    NumFolio:String,   
+    cantidad:String,
+    descuento:String,
+    descuentoAplicado:String,
+    TotalPrecioProducto:String,
+    statusCotizacion:String,  
+    subtotal:String,
+    iva:String,
+    total:String,
+    empresa:String,
+    rfc:String,
+    fk_cliente:String,
+    tipo:String,
+    concepto:String,
+    message:String,
+    fechaExpiracion:String,
+    fk_adminalfa:String,
+    fk_contacto:String,
+}
+
+
+type insertCotizaciones{
+  id_cotizaciones:String,
+   fechaEmision:String,
+   NumFolio:String,   
+   cantidad:String,
+   descuento:String,
+   descuentoAplicado:String,
+   TotalPrecioProducto:String,
+   fk_cliente:String,
+   fk_productoServicio:String,
+   fk_adminalfa:String,
+   fk_empresa:String,   
+   fechaExpiracion:String, 
+   fk_contacto:String,
+   tipoSolicitud:String,
+   message:String
+
+}
+
+type getEmpresas{
+    id_empresa:String,
+    rfc:String,
+    razonSocial:String,
+    correo:String,
+    telefono:String,
+    paginaWeb:String,
+    domicilioFiscal:String,
+    # token:String,
+    message:String     
+}
+
+type signupAlfa{
+    id_admin:String,
+    nombre:String,
+    apellido:String,
+    correo:String,
+    telefono:String,
+    ext:String,
+    celular:String,
+    puesto:String,
+    token:String,
+    message:String,
+    fk_empresa:String
+}
+type signupEmpresas{    
+    rfc:String,
+    razonSocial:String,
+    correo:String,
+    telefono:String,
+    paginaWeb:String,
+    domicilioFiscal:String,
+    token:String,
+    message:String
+}
+
+type loginAdminAlfa{ 
+    id_admin:String,
+    nombre:String,
+    apellido:String,
+    correo:String,
+    telefono:String,
+    extensionTelefonica:String,
+    razonSocial:String,                          
+    puesto:String,
+    celular:String,
+    token:String,
+    message:String,
+    fk_empresa:String
+    fk_rolAdministrador:String
+    
+}
+
+type loginEmpresas{
+    id_empresa:String,
+    rfc:String,
+    razonSocial:String,
+    correo:String,
+    telefono:String,
+    token:String,
+    message:String
+}
+
+type getTablaClientes{
+    id_cliente:String,
+    razonSocial:String,
+    rfc:String,
+    # nombre:String,
+    # apellido:String,
+    # correo1:String,
+    # correo2:String,
+    # telefono1:String,
+    # telefono2:String,    
+    message:String
+
+}
